@@ -32,8 +32,6 @@ EgoSound establishes a challenging foundation for advancing multisensory egocent
 
 ---
 
-## Teaser
-
 ![EgoSound Teaser](assets/teaser.png)
 
 ---

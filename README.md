@@ -62,12 +62,35 @@ Currently supported models:
 
 ## Step 0: Preparation
 
-Prepare:
+**Prepare Data:**
 
-1. Question–Answer (ground truth) JSON file  
-   - See format: `example/example_qa.json`
-2. Model checkpoint for the target MLLM
-
+1. download preprocessed ego4d video clips and question-answer annotations from huggingface [data](https://huggingface.co/datasets/grooLegend/EgoSound)
+   make sure the directory layout is :
+      ```text
+EgoSchema
+    └── videos
+        ├── *.mp4
+        ├── ...
+    └── audios
+        ├── *.wav
+        ├── ...
+```
+3. download egoblind dataset from [egoblind](https://github.com/doc-doc/EgoBlind) make sure the directory layout is :
+   ```text
+EgoBlind
+    └── videos
+        ├── *.mp4
+        ├── ...
+    └── audios
+        ├── *.wav
+        ├── ...
+```
+3. Download Model checkpoint for the target MLLM
+[EgoGPT-7b-EgoIT-EgoLife](https://huggingface.co/lmms-lab/EgoGPT-7b-EgoIT-EgoLife)
+[MiniCPM-o-2_6](https://huggingface.co/openbmb/MiniCPM-o-2_6)
+[Qwen3-Omni-30B-A3B-Thinking](https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Thinking)
+[Qwen2.5-Omni-3B](https://huggingface.co/Qwen/Qwen2.5-Omni-3B)
+[VideoLLaMA2.1-7B-AV](https://huggingface.co/DAMO-NLP-SG/VideoLLaMA2.1-7B-AV)
 ---
 
 ## Step 1: Inference
@@ -79,7 +102,7 @@ Edit `config.yaml` to specify:
 - Model checkpoint path  
 - Output path  
 - Model name  
-- QA file path  
+- path to the question-answer annotation file you download on huggingface 
 
 For **VideoLLaMA2**, you must additionally specify the modality:
 - `audio`

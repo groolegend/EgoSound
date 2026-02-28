@@ -2,14 +2,14 @@ models:
   # EgoGPT 
   - model_name: egogpt_av
     script: scripts/egogpt_av_inference.py
-    ckpt_path: "EgoGPT-7b-EgoIT-EgoLife"
-    qa_path: "gpt5_qa_splits/split_4.json"
+    ckpt_path: "path/to/egogpt_av_checkpoint"
+    qa_path: "path/to/question_answer_annotation.json"
     answer_dir: "output"
 
   # MiniCPM 
   - model_name: minicpm_av
     script: scripts/minicpm_av_infer.py
-    ckpt_path: "MiniCPM-o-2_6"
+    ckpt_path: "ckpt/MiniCPM-o-2_6"
     qa_path: ""
     answer_dir: ""
 

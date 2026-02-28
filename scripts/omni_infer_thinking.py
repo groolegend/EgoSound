@@ -22,7 +22,6 @@ model = Qwen3OmniMoeForConditionalGeneration.from_pretrained(
 )
 model.disable_talker()
 processor = Qwen3OmniMoeProcessor.from_pretrained(MODEL_PATH)
-VIDEO_DIR = "/inspire/hdd/global_user/zhubingwen-253108120125/EgoBlind/videos"
 
 def eval_omni(part):
     qa_path=os.environ.get(
@@ -39,11 +38,10 @@ def eval_omni(part):
     # 结果目录：ANSWER_DIR，内部按 question_id 单独落 JSON
     json_root = os.environ.get(
         "ANSWER_DIR",
-        " ",
+        "./results",
     )
     os.makedirs(json_root, exist_ok=True)
-    json_dir = json_root
-    pro_ids =[id.split('.')[0] for id in os.listdir(json_dir)]
+    pro_ids =[id.split('.')[0] for id in os.listdir(json_root)]
     pro_ids = set(pro_ids)
     print(len(pro_ids))
     qa_all = []
@@ -97,7 +95,7 @@ def eval_omni(part):
             try:
                 qa['pred'] = text[0].split('</think>\n\n')[1]
                 results.append(qa)
-                json_path = f"/inspire/hdd/global_user/zhubingwen-253108120125/qwen3_omni/result_thinking/{qa['question_id']}.json"
+                json_path = os.path.join(json_root, f"{qa['question_id']}.json")
                 with open(json_path, "w", encoding="utf-8") as f:
                     json.dump(qa, f, indent=4, ensure_ascii=False)
             except Exception as e:

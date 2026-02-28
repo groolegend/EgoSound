@@ -100,10 +100,10 @@ EgoBlind
 
 Edit `config.yaml` to specify:
 
-- Model checkpoint path  
+- Path to mllm checkpoint 
 - Output path  
 - Model name  
-- path to the question-answer annotation file you download on huggingface 
+- Path to the question-answer annotation file you download on huggingface 
 
 For **VideoLLaMA2**, you must additionally specify the modality:
 - `audio`

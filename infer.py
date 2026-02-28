@@ -13,8 +13,7 @@ def run_model(model_cfg):
     ckpt_path = model_cfg.get("ckpt_path")
     qa_path = model_cfg.get("qa_path")
     answer_dir = model_cfg.get("answer_dir")
-    video_path = model_cfg.get("video_path")
-    audio_path = model_cfg.get("audio_path")
+
     modal_type = model_cfg.get("modal_type")
 
     env = os.environ.copy()
@@ -25,10 +24,6 @@ def run_model(model_cfg):
         env["QA_PATH"] = qa_path
     if answer_dir:
         env["ANSWER_DIR"] = answer_dir
-    if video_path:
-        env["VIDEO_PATH"] = video_path
-    if audio_path:
-        env["AUDIO_PATH"] = audio_path
     if modal_type:
         env["MODAL_TYPE"] = modal_type
 

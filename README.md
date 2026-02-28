@@ -65,8 +65,8 @@ Currently supported models:
 **Prepare Data:**
 
 1. download preprocessed ego4d video clips and question-answer annotations from huggingface [data](https://huggingface.co/datasets/grooLegend/EgoSound)
-   make sure the directory layout is :
-      ```text
+make sure the directory layout is :
+```text
 EgoSchema
     └── videos
         ├── *.mp4
@@ -75,8 +75,9 @@ EgoSchema
         ├── *.wav
         ├── ...
 ```
-3. download egoblind dataset from [egoblind](https://github.com/doc-doc/EgoBlind) make sure the directory layout is :
-   ```text
+2. download egoblind dataset from [egoblind](https://github.com/doc-doc/EgoBlind)
+   make sure the directory layout is :
+```text
 EgoBlind
     └── videos
         ├── *.mp4

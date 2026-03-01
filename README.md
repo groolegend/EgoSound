@@ -164,9 +164,7 @@ For all models listed above (except Video-SALMONN-2), the generated answers shou
   "pred": "..."
 }
 ```
-To evaluate the predictions
-
-Run:
+To evaluate the predictions,run:
 ```bash
 python qa_eval_gpt.py --answer_path "YOUR_PATH"
 ```
@@ -182,9 +180,7 @@ for video-SALMONN2, its answers should follow the format below:
     "pred": "..."
 }
 ```
-To evaluate its predictions ,
-
-Run:
+To evaluate its predictions,run:
 ```bash
 python qa_eval_gpt.py --answer_path "YOUR_PATH" --style videosalmonn
 ```

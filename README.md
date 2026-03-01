@@ -103,6 +103,7 @@ data
 [Qwen3-Omni-30B-A3B-Thinking](https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Thinking),
 [Qwen2.5-Omni-3B](https://huggingface.co/Qwen/Qwen2.5-Omni-3B),
 [VideoLLaMA2.1-7B-AV](https://huggingface.co/DAMO-NLP-SG/VideoLLaMA2.1-7B-AV),
+[Video-SALMONN-2](https://github.com/bytedance/video-SALMONN-2),
 ---
 
 ## Step 1: Inference

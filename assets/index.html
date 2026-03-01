@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EgoSound Audio-Visual QA Dataset For Sound Understanding </title>
+  <meta name="description" content=" EgoSound, a comprehensive audio-visual QA data set tailored for sound understanding." />
+  <meta name="keywords" content="egocentric, egovqa, EgoSchema, MLLM, video question answering, benchmark, audio-visual QA, sound understanding" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#8F5975; 
+      --ink:#0b1220; 
+      --muted:#5b6474;
+      --bg:#ffffff;
+      --bg-alt:#f6f8ff;
+      --card:#ffffff;
+      --shadow:0 10px 30px rgba(0,0,0,.06);
+      --radius:18px;
+      --hero-overlay-color: rgba(4, 19, 47, 0.95);
+      --hero-text-color: #ffffff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";color:var(--ink);background:var(--bg)}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1120px;margin:0 auto;padding:0 20px}
+    /* Header */
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid #e9ecf5}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand img{height:60px;width:auto}
+    .brand .title{font-weight:700;letter-spacing:.2px;font-size:32px}
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px}
+    nav a{font-weight:600;color:#1a2440}
+    .btn{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--brand);color:#fff;background:var(--brand);padding:12px 16px;border-radius:12px;font-weight:700;box-shadow:var(--shadow);transition:transform .08s ease}
+    .btn:hover{text-decoration:none;transform:translateY(-1px)}
+    .btn.outline{background:transparent;color:var(--brand)}
+    .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--brand);background:#e9efff;border:1px solid #ccdbff;padding:6px 10px;border-radius:999px}
+    /* Hero */
+    .hero{
+      position:relative;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+    }
+    .hero-background{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:1;
+    }
+    .hero-overlay{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:var(--hero-overlay-color);
+      z-index:2;
+    }
+    .hero-content{
+      position:relative;
+      z-index:3;
+      color:var(--hero-text-color);
+      max-width:840px;
+      padding:0 20px;
+    }
+    .hero h1{font-size:64px;line-height:1.08;margin:.2rem 0 1rem;color:var(--hero-text-color)}
+    .hero-title-tag{font-size:.6em;font-weight:400;margin-left:8px;opacity:0.9}
+    .hero p{font-size:18px;max-width:840px;color:var(--hero-text-color);opacity:0.9}
+    .hero .tag{color:var(--hero-text-color);background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3)}
+    .btn-hero{display:inline-flex;align-items:center;gap:8px;border:2px solid #ffffff;color:#ffffff;background:transparent;padding:12px 16px;border-radius:12px;font-weight:700;text-decoration:none;transition:all 0.2s ease}
+    .btn-hero:hover{background:var(--brand);color:#ffffff;border-color:var(--brand);text-decoration:none;transform:translateY(-1px)}
+    /* Section */
+    section{padding:64px 0}
+    section h2{font-size:28px;margin:0 0 14px}
+    section p.lead{color:var(--muted);margin:0 0 18px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .card{grid-column:span 6;background:var(--card);border:1px solid #e9ecf5;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .media{position:relative;background:#e9efff;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .media img{width:100%;height:100%;object-fit:cover}
+    .section-figure{background:#fff;margin:12px 0 20px;border-radius:18px;overflow:hidden;line-height:0}
+    .section-figure img{width:100%;height:auto;display:block;vertical-align:middle}
+    .badge{position:absolute;top:12px;left:12px;background:#ffffff; border:1px solid #dfe7ff;color:#2a3a7a;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;z-index:3}
+    .card-body{padding:14px 16px}
+    .card h3{font-size:18px;margin:0 0 6px}
+    .muted{color:var(--muted)}
+    /* Video Controls */
+    .video-container{position:relative;width:100%;height:100%}
+    .video-container video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s ease}
+    .video-container video.active{opacity:1;z-index:1}
+    .video-container video.inactive{opacity:0;z-index:0}
+    .video-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
+    .video-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.5);border:2px solid rgba(255,255,255,.8);cursor:pointer;transition:all .3s ease}
+    .video-dot:hover{background:rgba(255,255,255,.8);transform:scale(1.2)}
+    .video-dot.active{background:#ffffff;transform:scale(1.15)}
+    /* Download */
+    .dl{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+    .btn.disabled{opacity:.55;cursor:not-allowed}
+    /* Resources */
+    .res-list{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .res{grid-column:span 6;padding:16px;border-radius:14px;border:1px dashed #cfe0ff;background:#f7faff}
+    /* Team */
+    .team-members{display:flex;gap:32px;flex-wrap:wrap;align-items:center;justify-content:center}
+    .team-member{text-align:center;cursor:pointer;transition:transform 0.2s ease}
+    .team-member:hover{transform:translateY(-2px)}
+    .team-member img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--brand);box-shadow:var(--shadow)}
+    .team-member .name{margin-top:12px;font-weight:600;color:var(--ink)}
+    .logos{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+    .logos img{height:40px;filter:grayscale(0.15)}
+    /* Footer */
+    footer{border-top:1px solid #e9ecf5;padding:28px 0;color:#6b7385;font-size:14px}
+    @media (max-width:880px){
+      .card{grid-column:span 12}
+      .res{grid-column:span 12}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Nav -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="title">EgoSound</span>
+      </div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#samples">Samples</a></li>
+          <li><a href="#data-construction">DataConstruction</a></li>
+          <li><a href="#performance">Experiments</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="#citation">Citation</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>EgoSound<span class="hero-title-tag">[CVPR2026]</span></h1>
+      <p style="margin: 8px 0 4px; font-size: 18px; color: #facc15;">
+        Bingwen Zhu<sup>1,2*</sup> Yuqian Fu<sup>3*†</sup> Qiaole Dong<sup>1</sup> Guolei Sun<sup>4</sup> Tianwen Qian<sup>5</sup><br/>
+        Yuzheng Wu<sup>1</sup> Danda Pani Paudel<sup>3</sup> Xiangyang Xue<sup>1</sup> Yanwei Fu<sup>1,2</sup>
+      </p>
+      <p style="margin: 0 0 34px; font-size: 16px;">
+        <sup>1</sup>Fudan University&nbsp;&nbsp;
+        <sup>2</sup>Shanghai Innovation Institute&nbsp;&nbsp;
+        <sup>3</sup>INSAIT&nbsp;&nbsp;
+        <sup>4</sup>Nankai University&nbsp;&nbsp;
+        <sup>5</sup>East China Normal University
+      </p>
+      <p style="margin: 16px 0 0; font-size: 16px;">
+        <span style="font-size: 22px; font-weight: 600;">
+          A comprehensive audio-visual QA dataset tailored for <strong>sound understanding</strong>.
+        </span>
+        EgoSound contains <strong>7315</strong> validated QA pairs across <strong>900</strong>
+        videos, covering intrinsic sound perception, spatial reasoning, causal inference, and
+        cross-modal understanding.
+      </p>
+      <div style="margin-top: 24px;">
+        <a class="btn-hero" href="#samples">Audio-Visual QA for Sound Understanding</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <h2>About the Dataset</h2>
+      <p class="lead">
+        We introduce EgoSound, the first benchmark that systematically evaluates <strong>sound understanding in egocentric videos</strong> for multimodal large language models (MLLMs). It covers both environmental sounds from human–object interactions and human dialogues that drive contextual understanding, <span style="color:#60a5fa;">enabling models that can hear, not just see, from a first-person viewpoint.</span>
+      </p>
+      
+      <p class="lead">
+        EgoSound integrates videos from the large-scale
+        <a href="https://ego4d-data.org/" target="_blank" rel="noopener">Ego4D dataset</a>
+        and the
+        <a href="https://github.com/doc-doc/EgoBlind" target="_blank" rel="noopener">EgoBlind dataset</a>, and defines seven task families:
+        <strong>sound characteristics, counting, temporal attributes, spatial localization, sound source identification, inferential causality, and cross-modal reasoning</strong>.
+        Through a rigorous multi-stage curation pipeline leveraging modern generative models (Qwen2.5-VL, Gemini-2.5, GPT-4o), we obtain <strong>7,315</strong> validated open-ended QA pairs over 900 carefully filtered videos.
+      </p>
+
+      <p class="lead">
+        We evaluate eight state-of-the-art MLLMs, including Qwen-Omni, video-SALMONN 2+, VideoLLaMA 2.1, MiniCPM, and the egocentric-specialized EgoGPT.
+        <span style="color:#60a5fa;">Despite emerging auditory reasoning abilities, current models still struggle with fine-grained spatial, temporal, and causal inference based on sound.</span>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Samples (Figure 1 style: 4 domains) -->
+  <section id="samples" aria-label="Data Samples">
+    <div class="container">
+      <h2>Data Samples</h2>
+      <div class="grid" style="margin-top:12px">
+        <!-- Surgery -->
+        <article class="card" aria-label="Surgery Domain">
+          <div class="media" role="img" aria-label="Surgery sample video">
+            <div class="video-container">
+              <video class="active" autoplay loop muted playsinline preload="auto" src="assets/00001_5_8.mp4"></video>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Inferential &amp; Contextual Causality</h3>
+            <p class="muted">
+              <strong>Question:</strong> Why did the user warn, &quot;Don't look at my cards, please&quot;?<br/>
+              <strong>Answer:</strong> Because the person on the couch hand moved too close toward their cards while shuffling, suggesting a risk of peeking.
+            </p>
+          </div>
+        </article>
+        <!-- Industry -->
+        <article class="card" aria-label="Industry Domain">
+          <div class="media" role="img" aria-label="Industry sample video">
+            <div class="video-container">
+              <video class="active" autoplay loop muted playsinline preload="auto" src="assets/00002_36_40.mp4"></video>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Sound Characteristics</h3>
+            <p class="muted">
+              <strong>Question:</strong> What are the acoustic qualities and duration of the scratching sound made while drawing the line at 00:36–00:40?<br/>
+              <strong>Answer:</strong> A continuous, distinct scratching that lasts about 4 seconds.
+            </p>
+          </div>
+        </article>
+        <!-- Extreme Sports -->
+        <article class="card" aria-label="Extreme Sports Domain">
+          <div class="media" role="img" aria-label="Extreme Sports sample video">
+            <div class="video-container">
+              <video class="active" autoplay loop muted playsinline preload="auto" src="assets/00003_22_26.mp4"></video>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Counting</h3>
+            <p class="muted">
+              <strong>Question:</strong> How many numbers did the female voice count between 00:22 and 00:26, and what were they?<br/>
+              <strong>Answer:</strong> Six numbers: 5, 6, 7, 8, 9, and 11.
+            </p>
+          </div>
+        </article>
+        <!-- Animal Perspective -->
+        <article class="card" aria-label="Animal Perspective Domain">
+          <div class="media" role="img" aria-label="Animal Perspective sample video">
+            <div class="video-container">
+              <video class="active" autoplay loop muted playsinline preload="auto" src="assets/00004_43_48.mp4"></video>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Inferential &amp; Contextual Causality</h3>
+            <p class="muted">
+              <strong>Question:</strong> What prompted the man's remark &quot;F*** that card&quot; at 00:47–00:48?<br/>
+              <strong>Answer:</strong> The user's recently played card(s) that had just been placed on the table.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Construction -->
+  <section id="data-construction" aria-label="Data Construction">
+    <div class="container">
+      <h2>Data Construction</h2>
+      <div class="section-figure">
+        <img src="assets/pipline.png" alt="EgoSound data construction overview">
+      </div>
+      <p class="lead">
+        <strong>Human interaction annotation.</strong> In the first stage, we annotate temporally grounded human–object interaction moments that are likely to produce sound. These structured interaction labels provide rich context and are used as conditioning prompts to guide the next stage of caption generation.
+      </p>
+      <p class="lead">
+        <strong>Audio–visual caption generation.</strong> In the second stage, we use Gemini-2.5 to generate sound-centered audio–visual captions, conditioned on the interaction labels. For each interaction, the model describes the sound source, its acoustic traits, how many sources are active, when and how long it occurs, where it is in space, why it happens, and how visual context explains the audio.
+      </p>
+      <p class="lead">
+        <strong>Q&amp;A pairs construction.</strong> In the final stage, GPT-4o generates meaningful Q&amp;A pairs from the detailed captions and corresponding video frames. Each pair must be visually supported by the clip to ensure factual consistency between sound descriptions and the underlying video evidence.
+      </p>
+    </div>
+  </section>
+
+  <!-- Performance on EgoSound -->
+  <section id="performance" aria-label="Performance on EgoSound">
+    <div class="container">
+      <h2>Performance on EgoSound</h2>
+      <div class="section-figure">
+        <img src="assets/result.png" alt="Performance on EgoSound">
+      </div>
+      <p class="lead">
+        We evaluate EgoSound on a range of state-of-the-art MLLMs that jointly process audio and video, and compare them with human performance. Our experiments reveal that egocentric
+        sound understanding remains a formidable challenge for
+        current multimodal models, despite their strong progress in
+        vision-language integration.
+      </p>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section id="download" aria-label="Download">
+    <div class="container">
+      <h2>Download</h2>
+      <p class="lead">EgoCross dataset is now available on Hugging Face. Access the complete benchmark with all domains and QA pairs.</p>
+      <div class="dl">
+        <a class="btn" href="https://huggingface.co/datasets/grooLegend/EgoSound" target="_blank" rel="noopener">Download from Hugging Face 🤗</a>
+        <span class="muted">The complete dataset contains 900 video clips and 7,315 QA pairs spanning seven task categories.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources -->
+  <section id="resources" aria-label="Resources">
+    <div class="container">
+      <h2>Resources</h2>
+      <div class="res-list" style="margin-top:8px">
+        <div class="res">
+          <strong>Paper</strong><br/>
+          <a href="https://arxiv.org/pdf/2508.10729" target="_blank" rel="noopener">EgoSound</a>
+        </div>
+        <div class="res">
+          <strong>GitHub</strong><br/>
+          <a href="https://github.com/groolegend/EgoSound" target="_blank" rel="noopener">Evaluation & Inference Code </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Citation -->
+  <section id="citation" aria-label="Citation">
+    <div class="container">
+      <h2>Citation</h2>
+      <p class="lead">If you find EgoSound useful in your research, please cite:</p>
+      <pre style="background:#020617;color:#e5e7eb;padding:16px;border-radius:12px;overflow:auto;font-size:13px;">
+@article{zhu2026egosound,
+  title={EgoSound: Benchmarking Sound Understanding in Egocentric Videos},
+  author={Zhu, Bingwen and Fu, Yuqian and Dong, Qiaole and Sun, Guolei and Qian, Tianwen and Wu, Yuzheng and Paudel, Danda Pani and Xue, Xiangyang and Fu, Yanwei},
+  journal={arXiv preprint arXiv:2602.14122},
+  year={2026}
+}
+      </pre>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>© <span id="y"></span> EgoSound. All rights reserved.</div>
+      <div><a href="#about">Back to top ↑</a></div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    document.addEventListener('DOMContentLoaded', function() {
+      const allVideos = document.querySelectorAll('video');
+      allVideos.forEach((video, index) => {
+        video.addEventListener('loadeddata', function() {
+          if (this.classList.contains('active')) {
+            this.play().catch(e => console.log('Video play failed on load:', e));
+          }
+        });
+        video.play().catch(e => {
+          setTimeout(() => video.play().catch(() => {}), 500);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

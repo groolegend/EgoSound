@@ -100,8 +100,8 @@ data
 2. Download Model checkpoint for the target MLLM
 [EgoGPT-7b-EgoIT-EgoLife](https://huggingface.co/lmms-lab/EgoGPT-7b-EgoIT-EgoLife),
 [MiniCPM-o-2_6](https://huggingface.co/openbmb/MiniCPM-o-2_6),
-[Qwen3](https://huggingface.co/collections/Qwen/qwen3),
-[Qwen2.5](https://huggingface.co/collections/Qwen/qwen25),
+[Qwen3-omni](https://github.com/QwenLM/Qwen3-Omni),
+[Qwen2.5-omni](https://github.com/QwenLM/Qwen2.5-Omni),
 [VideoLLaMA2.1-7B-AV](https://huggingface.co/DAMO-NLP-SG/VideoLLaMA2.1-7B-AV),
 [Video-SALMONN-2](https://github.com/bytedance/video-SALMONN-2),
 ---

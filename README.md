@@ -100,8 +100,8 @@ data
 2. Download Model checkpoint for the target MLLM
 [EgoGPT-7b-EgoIT-EgoLife](https://huggingface.co/lmms-lab/EgoGPT-7b-EgoIT-EgoLife),
 [MiniCPM-o-2_6](https://huggingface.co/openbmb/MiniCPM-o-2_6),
-[Qwen3-Omni-30B-A3B-Thinking](https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Thinking),
-[Qwen2.5-Omni-3B](https://huggingface.co/Qwen/Qwen2.5-Omni-3B),
+[Qwen3](https://huggingface.co/collections/Qwen/qwen3),
+[Qwen2.5](https://huggingface.co/collections/Qwen/qwen25),
 [VideoLLaMA2.1-7B-AV](https://huggingface.co/DAMO-NLP-SG/VideoLLaMA2.1-7B-AV),
 [Video-SALMONN-2](https://github.com/bytedance/video-SALMONN-2),
 ---
@@ -192,14 +192,11 @@ python qa_eval_gpt.py --answer_path "YOUR_PATH" --style videosalmonn
 ## Citation
 If you find our benchmark or code useful for your research, please consider citing:
 ```bibtex
-@misc{zhu2026egosoundbenchmarkingsoundunderstanding,
-      title={EgoSound: Benchmarking Sound Understanding in Egocentric Videos}, 
-      author={Bingwen Zhu and Yuqian Fu and Qiaole Dong and Guolei Sun and Tianwen Qian and Yuzheng Wu and Danda Pani Paudel and Xiangyang Xue and Yanwei Fu},
-      year={2026},
-      eprint={2602.14122},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2602.14122}
+@article{zhu2026egosound,
+  title={EgoSound: Benchmarking Sound Understanding in Egocentric Videos},
+  author={Zhu, Bingwen and Fu, Yuqian and Dong, Qiaole and Sun, Guolei and Qian, Tianwen and Wu, Yuzheng and Paudel, Danda Pani and Xue, Xiangyang and Fu, Yanwei},
+  journal={arXiv preprint arXiv:2602.14122},
+  year={2026}
 }
 ```
 

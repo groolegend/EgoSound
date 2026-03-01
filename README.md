@@ -7,6 +7,7 @@ Official release of the paper:
 **EgoSound: Benchmarking Sound Understanding in Egocentric Videos**  
 📄 **[paper](https://arxiv.org/abs/2602.14122)**
 
+👐 **[huggingface](https://huggingface.co/datasets/grooLegend/EgoSound)**
 
 ---
 

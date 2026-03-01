@@ -164,7 +164,7 @@ For all models listed above (except Video-SALMONN-2), the generated answers shou
   "pred": "..."
 }
 ```
-To evaluate the answers
+To evaluate the predictions
 
 Run:
 ```bash
@@ -182,7 +182,7 @@ for video-SALMONN2, its answers should follow the format below:
     "pred": "..."
 }
 ```
-To evaluate its answers ,
+To evaluate its predictions ,
 
 Run:
 ```bash

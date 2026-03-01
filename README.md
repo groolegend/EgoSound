@@ -5,7 +5,7 @@
 Official release of the paper:
 
 **EgoSound: Benchmarking Sound Understanding in Egocentric Videos**  
-📄 **[EgoSound: Benchmarking Sound Understanding in Egocentric Videos](https://arxiv.org/abs/2602.14122)**
+📄 **[paper](https://arxiv.org/abs/2602.14122)**
 
 
 ---
@@ -64,29 +64,31 @@ Currently supported models:
 
 **Prepare Data:**
 
-1. download preprocessed ego4d video clips and question-answer annotations from huggingface [data](https://huggingface.co/datasets/grooLegend/EgoSound)
-make sure the directory layout is :
+1. download preprocessed egoblind and ego4d video clips and question-answer annotations from huggingface [data](https://huggingface.co/datasets/grooLegend/EgoSound)
+* make sure the directory layout is :
 ```text
-EgoSchema
-    └── videos
-        ├── *.mp4
-        ├── ...
-    └── audios
-        ├── *.wav
-        ├── ...
+data
+  └── EgoBlind
+  |      └── videos
+  |      |       ├── *.mp4
+  |      |       ├── ...
+  |      └── audios
+  |              ├── *.wav
+  |              ├── ...
+  |
+  └── EgoBlind
+  |      └── videos
+  |      |       ├── *.mp4
+  |      |       ├── ...
+  |      └── audios
+  |              ├── *.wav
+  |              ├── ...
+  |
+  ├── egoblind.json
+  ├── ego4d.json
 ```
-2. download egoblind dataset from [egoblind](https://github.com/doc-doc/EgoBlind)
-   make sure the directory layout is :
-```text
-EgoBlind
-    └── videos
-        ├── *.mp4
-        ├── ...
-    └── audios
-        ├── *.wav
-        ├── ...
-```
-3. Download Model checkpoint for the target MLLM
+
+2. Download Model checkpoint for the target MLLM
 [EgoGPT-7b-EgoIT-EgoLife](https://huggingface.co/lmms-lab/EgoGPT-7b-EgoIT-EgoLife),
 [MiniCPM-o-2_6](https://huggingface.co/openbmb/MiniCPM-o-2_6),
 [Qwen3-Omni-30B-A3B-Thinking](https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Thinking),
@@ -96,7 +98,7 @@ EgoBlind
 
 ## Step 1: Inference
 
-### 1.1 Configure
+### 1.1 Configure 
 
 Edit `config.yaml` to specify:
 

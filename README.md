@@ -1,4 +1,4 @@
-# EgoSound (CVPR 2026)
+# [CVPR2026]EgoSound 
 
 ## EgoSound: Benchmarking Sound Understanding in Egocentric Videos
 
@@ -17,10 +17,13 @@ We introduce **EgoSound**, the first benchmark designed to systematically evalua
 
 EgoSound unifies data from **Ego4D** and **EgoBlind**, covering both sighted and sound-dependent experiences. The benchmark defines a **seven-task taxonomy**, spanning:
 
-- Intrinsic sound perception  
-- Spatial localization  
-- Causal inference  
-- Cross-modal reasoning  
+- Sound Characteristics  
+- Counting
+- Temporal Attribute
+- Spatial Location
+- Sound Source Identification
+- Inferential Causality
+- Cross-Modal Reasoning  
 
 Constructed through a multi-stage auto-generative pipeline, EgoSound contains:
 
@@ -49,13 +52,18 @@ We evaluate multiple state-of-the-art MLLMs on EgoSound. The benchmark results a
 
 We provide evaluation code to reproduce our experimental results.
 
-Currently supported models:
+| Model                  | Inference | Evaluation |
+|------------------------|-----------|------------|
+| EgoGPT-7B              | ✔         | ✔          |
+| VideoLLaMA2.1-AV-7B    | ✔         | ✔          |
+| MiniCPM-o 2.6-8B       | ✔         | ✔          |
+| Qwen2.5-Omni           | ✔         | ✔          |
+| Qwen3-Omni             | ✔         | ✔          |
+| Video-SALMONN-2        | ✖         | ✔          |
 
-- EgoGPT-7B  
-- VideoLLaMA2.1-AV-7B  
-- MiniCPM-o 2.6-8B  
-- Qwen2.5-Omni  
-- Qwen3-Omni  
+
+**For Video-Salmonn, we only provide the evaluation code. Please refer to its official repository for inference：[github](https://github.com/bytedance/video-SALMONN-2)**
+
 
 ---
 
@@ -147,8 +155,7 @@ The inference stage generates answer.json.
 
 We use **GPT-5 as a judge** to automatically evaluate model predictions.
 
-Depending on the format of answer.json, use the appropriate interface.
-### Format A (VideoLLaMA-style)
+For all models listed above (except Video-SALMONN-2), the generated answers should follow the format below:
 ```json
 {
   "question": "...",
@@ -156,13 +163,15 @@ Depending on the format of answer.json, use the appropriate interface.
   "pred": "..."
 }
 ```
+To evaluate the answers
 
 Run:
 ```bash
-python qa_eval_gpt.py --answer_path "YOUR_PATH" --style videollama
+python qa_eval_gpt.py --answer_path "YOUR_PATH"
 ```
 
-### Format B (VideoSalmonn-style)
+for video-SALMONN2, its answers should follow the format below:
+
 ```json
 {
     "prompt": {
@@ -172,6 +181,7 @@ python qa_eval_gpt.py --answer_path "YOUR_PATH" --style videollama
     "pred": "..."
 }
 ```
+To evaluate its answers ,
 
 Run:
 ```bash

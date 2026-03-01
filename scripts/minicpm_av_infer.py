@@ -89,12 +89,9 @@ def eval_omni():
     os.makedirs(answer_dir, exist_ok=True)
     answer_file = os.path.join(answer_dir, "result.json")
     results=[]
-    qa_part_2 = qa_data[len(qa_data)//2:]
-    for i, qa in enumerate(tqdm(qa_part_2), start=1):
+    for i, qa in enumerate(tqdm(qa_data), start=1):
         video_path=qa['video_path']
         video_id = int(extract_video_id(video_path))
-        if video_id<1307:
-            continue
         audio_path=video_path.replace('videos','audios').replace('.mp4','.wav')
         sys_msg = model.get_sys_prompt(mode='omni', language='en')
 
@@ -168,9 +165,7 @@ def eval_audio():
         )
         qa['pred']= res
         results.append(qa)
-        if i % 50 == 0:
-            pass
-
+        
     with open(answer_file, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=4, ensure_ascii=False)
         

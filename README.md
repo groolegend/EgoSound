@@ -10,6 +10,7 @@ Official release of the paper:
 👐 **[huggingface](https://huggingface.co/datasets/grooLegend/EgoSound)**
 
 🌍 **[website page](https://groolegend.github.io/EgoSound/)**
+
 ---
 
 ## Overview

@@ -79,7 +79,7 @@ We provide evaluation code to reproduce our experimental results.
 * make sure the directory layout is :
 ```text
 data
-  └── EgoBlind
+  └── Ego4d
   |      └── videos
   |      |       ├── *.mp4
   |      |       ├── ...

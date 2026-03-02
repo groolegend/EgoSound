@@ -19,7 +19,7 @@
       --card:#ffffff;
       --shadow:0 10px 30px rgba(0,0,0,.06);
       --radius:18px;
-      --hero-overlay-color: rgba(4, 19, 47, 0.95);
+      --hero-overlay-color: rgba(16, 123, 128, 0.66);
       --hero-text-color: #ffffff;
     }
     *{box-sizing:border-box}
@@ -73,7 +73,9 @@
       z-index:3;
       color:var(--hero-text-color);
       max-width:840px;
-      padding:0 20px;
+      padding:28px 32px;
+      background:radial-gradient(ellipse 85% 90% at 50% 50%, rgba(16, 123, 128, 0.5), rgba(16, 123, 128, 0.15));
+      border-radius:16px;
     }
     .hero h1{font-size:64px;line-height:1.08;margin:.2rem 0 2.6rem;color:var(--hero-text-color)}
     .hero-title-tag{font-size:.6em;font-weight:400;margin-left:8px;opacity:0.9}
@@ -105,6 +107,10 @@
     .video-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.5);border:2px solid rgba(255,255,255,.8);cursor:pointer;transition:all .3s ease}
     .video-dot:hover{background:rgba(255,255,255,.8);transform:scale(1.2)}
     .video-dot.active{background:#ffffff;transform:scale(1.15)}
+    .video-sound-btn{position:absolute;top:12px;right:12px;z-index:3;width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,0.9);background:rgba(0,0,0,0.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:background .2s,transform .1s}
+    .video-sound-btn:hover{background:rgba(0,0,0,0.7);transform:scale(1.05)}
+    .video-sound-btn.muted{opacity:0.9}
+    .video-sound-btn.unmuted{background:var(--brand);border-color:rgba(255,255,255,0.9)}
     /* Download */
     .dl{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
     .btn.disabled{opacity:.55;cursor:not-allowed}
@@ -138,7 +144,7 @@
         <ul>
           <li><a href="#about">About</a></li>
           <li><a href="#samples">Samples</a></li>
-          <li><a href="#data-construction">DataConstruction</a></li>
+          <li><a href="#data-construction">DatasetConstruction</a></li>
           <li><a href="#performance">Experiments</a></li>
           <li><a href="#download">Download</a></li>
           <li><a href="#resources">Resources</a></li>
@@ -150,10 +156,11 @@
 
   <!-- Hero -->
   <section class="hero">
+    <img class="hero-background" src="assets/grid.gif" alt="">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1>EgoSound<span class="hero-title-tag">[CVPR2026]</span></h1>
-      <p style="margin: 8px 0 20px; font-size: 18px; color: #facc15;">
+      <p style="margin: 8px 0 20px; font-size: 18px; color: #ffffff;">
         <span class="author-name">Bingwen Zhu<sup>1,2*</sup></span>
         <span class="author-name">Yuqian Fu<sup>3*†</sup></span>
         <span class="author-name">Qiaole Dong<sup>1</sup></span>
@@ -175,6 +182,7 @@
         <span style="font-size: 22px; font-weight: 600;">
           A comprehensive audio-visual QA dataset tailored for <strong>sound understanding</strong>.
         </span>
+        <br/>
         EgoSound contains <strong>7315</strong> validated QA pairs across <strong>900</strong>
         videos, covering intrinsic sound perception, spatial reasoning, causal inference, and
         cross-modal understanding.
@@ -219,14 +227,15 @@
         <article class="card" aria-label="Surgery Domain">
           <div class="media" role="img" aria-label="Surgery sample video">
             <div class="video-container">
-              <video class="active" autoplay loop muted playsinline preload="auto" src="assets/00001_5_8.mp4"></video>
+              <video class="active" autoplay loop muted playsinline preload="auto" src="assets/00930_0_5.mp4"></video>
+              <button type="button" class="video-sound-btn muted" aria-label="Enable sound" title="Click to enable audio">🔇</button>
             </div>
           </div>
           <div class="card-body">
-            <h3>Inferential &amp; Contextual Causality</h3>
+            <h3>Spatial Location (Direction &amp; Distance)</h3>
             <p class="muted">
-              <strong>Question:</strong> Why did the user warn, &quot;Don't look at my cards, please&quot;?<br/>
-              <strong>Answer:</strong> Because the person on the couch hand moved too close toward their cards while shuffling, suggesting a risk of peeking.
+              <strong>Question:</strong> From where relative to the camera did the woman's voice originate?<br/>
+              <strong>Answer:</strong> From the front-left.
             </p>
           </div>
         </article>
@@ -235,6 +244,7 @@
           <div class="media" role="img" aria-label="Industry sample video">
             <div class="video-container">
               <video class="active" autoplay loop muted playsinline preload="auto" src="assets/00002_36_40.mp4"></video>
+              <button type="button" class="video-sound-btn muted" aria-label="Enable sound" title="Click to enable audio">🔇</button>
             </div>
           </div>
           <div class="card-body">
@@ -250,6 +260,7 @@
           <div class="media" role="img" aria-label="Extreme Sports sample video">
             <div class="video-container">
               <video class="active" autoplay loop muted playsinline preload="auto" src="assets/00003_22_26.mp4"></video>
+              <button type="button" class="video-sound-btn muted" aria-label="Enable sound" title="Click to enable audio">🔇</button>
             </div>
           </div>
           <div class="card-body">
@@ -264,14 +275,15 @@
         <article class="card" aria-label="Animal Perspective Domain">
           <div class="media" role="img" aria-label="Animal Perspective sample video">
             <div class="video-container">
-              <video class="active" autoplay loop muted playsinline preload="auto" src="assets/00004_43_48.mp4"></video>
+              <video class="active" autoplay loop muted playsinline preload="auto" src="assets/00953_0_6.mp4"></video>
+              <button type="button" class="video-sound-btn muted" aria-label="Enable sound" title="Click to enable audio">🔇</button>
             </div>
           </div>
           <div class="card-body">
-            <h3>Inferential &amp; Contextual Causality</h3>
+            <h3>Temporal Information</h3>
             <p class="muted">
-              <strong>Question:</strong> What prompted the man's remark &quot;F*** that card&quot; at 00:47–00:48?<br/>
-              <strong>Answer:</strong> The user's recently played card(s) that had just been placed on the table.
+              <strong>Question:</strong>Did the cane fall occur before, during, or after the male's statement?<br/>
+              <strong>Answer:</strong> During—-it happened simultaneously with his statement.
             </p>
           </div>
         </article>
@@ -282,7 +294,7 @@
   <!-- Data Construction -->
   <section id="data-construction" aria-label="Data Construction">
     <div class="container">
-      <h2>Data Construction</h2>
+      <h2>Dataset Construction</h2>
       <div class="section-figure">
         <img src="assets/pipline.png" alt="EgoSound data construction overview">
       </div>
@@ -349,10 +361,10 @@
       <h2>Citation</h2>
       <p class="lead">If you find EgoSound useful in your research, please cite :</p>
       <pre style="background:#020617;color:#e5e7eb;padding:16px;border-radius:12px;overflow:auto;font-size:13px;">
-@article{zhu2026egosound,
+@inproceedings{zhu2026egosound,
   title={EgoSound: Benchmarking Sound Understanding in Egocentric Videos},
   author={Zhu, Bingwen and Fu, Yuqian and Dong, Qiaole and Sun, Guolei and Qian, Tianwen and Wu, Yuzheng and Paudel, Danda Pani and Xue, Xiangyang and Fu, Yanwei},
-  journal={arXiv preprint arXiv:2602.14122},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year={2026}
 }
       </pre>
@@ -370,7 +382,7 @@
     document.getElementById('y').textContent = new Date().getFullYear();
     document.addEventListener('DOMContentLoaded', function() {
       const allVideos = document.querySelectorAll('video');
-      allVideos.forEach((video, index) => {
+      allVideos.forEach((video) => {
         video.addEventListener('loadeddata', function() {
           if (this.classList.contains('active')) {
             this.play().catch(e => console.log('Video play failed on load:', e));
@@ -378,6 +390,27 @@
         });
         video.play().catch(e => {
           setTimeout(() => video.play().catch(() => {}), 500);
+        });
+      });
+      document.querySelectorAll('.video-sound-btn').forEach((btn) => {
+        const container = btn.closest('.video-container');
+        const video = container ? container.querySelector('video') : null;
+        if (!video) return;
+        btn.addEventListener('click', function() {
+          video.muted = !video.muted;
+          if (video.muted) {
+            btn.classList.remove('unmuted');
+            btn.classList.add('muted');
+            btn.textContent = '🔇';
+            btn.setAttribute('aria-label', 'Enable sound');
+            btn.setAttribute('title', 'Click to enable audio');
+          } else {
+            btn.classList.remove('muted');
+            btn.classList.add('unmuted');
+            btn.textContent = '🔊';
+            btn.setAttribute('aria-label', 'Mute');
+            btn.setAttribute('title', 'Mute');
+          }
         });
       });
     });

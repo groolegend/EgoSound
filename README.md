@@ -190,10 +190,10 @@ python qa_eval_gpt.py --answer_path "YOUR_PATH" --style videosalmonn
 ## Citation
 If you find our benchmark or code useful for your research, please consider citing:
 ```bibtex
-@article{zhu2026egosound,
+@inproceedings{zhu2026egosound,
   title={EgoSound: Benchmarking Sound Understanding in Egocentric Videos},
   author={Zhu, Bingwen and Fu, Yuqian and Dong, Qiaole and Sun, Guolei and Qian, Tianwen and Wu, Yuzheng and Paudel, Danda Pani and Xue, Xiangyang and Fu, Yanwei},
-  journal={arXiv preprint arXiv:2602.14122},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year={2026}
 }
 ```

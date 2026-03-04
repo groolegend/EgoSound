@@ -15,8 +15,7 @@ NEW_OPENAI_API_KEY = "OPENAI_API_KEY"
 # It is recommended to set OPENAI_API_KEY in the environment variables.
 # Otherwise, you can manually set it: api_key="sk-xxx"
 client = OpenAI(
-    api_key=NEW_OPENAI_API_KEY,
-    base_url="http://35.164.11.19:3887/v1"
+    api_key=NEW_OPENAI_API_KEY
 )
 
 def interaction(client, message_text):

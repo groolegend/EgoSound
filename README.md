@@ -70,15 +70,21 @@ We provide evaluation code to reproduce our experimental results.
 ---
 
 # Reproducing Evaluation
-
-## Step 0: Preparation
+## Step 2:Installation
+1. follow the egogpt [repo](https://github.com/EvolvingLMMs-Lab/EgoLife/tree/main/EgoGPT) to install egogpt env
+2. 
+## Step 1: Preparation
 
 **Prepare Data:**
-
+1. download the repo
+```bash
+git clone https://github.com/groolegend/EgoSound.git
+cd EgoSound
+```  
 1. download preprocessed egoblind and ego4d video clips and question-answer annotations from huggingface [data](https://huggingface.co/datasets/grooLegend/EgoSound)
 * make sure the directory layout is :
 ```text
-data
+EgoSound
   └── Ego4d
   |      └── videos
   |      |       ├── *.mp4
@@ -108,9 +114,9 @@ data
 [Video-SALMONN-2](https://github.com/bytedance/video-SALMONN-2),
 ---
 
-## Step 1: Inference
+## Step 2: Inference
 
-### 1.1 Configure 
+### 2.1 Configure 
 
 Edit `config.yaml` to specify:
 
@@ -126,37 +132,43 @@ For **VideoLLaMA2**, you must additionally specify the modality:
 
 ---
 
-### 1.2 Run Inference
+### 2.2 Run Inference
+We provide multi-GPU parallel inference scripts to accelerate large-scale evaluation.
+
 
 Run all models defined in `config.yaml`:
 
 ```bash
-python infer.py
+python infer.py --num-gpus 8
 ```
+We recommend creating a separate virtual environment for each model to avoid dependency conflicts.
 
 Run a specific model:
 
 ```bash
 # EgoGPT
-python infer.py --only egogpt_av
+python infer.py --only egogpt_av --num-gpus 8
 
 # MiniCPM
-python infer.py --only minicpm_av
+python infer.py --only minicpm_av --num-gpus 8
 
 # Qwen2.5-Omni
-python infer.py --only qwen25_omni
+python infer.py --only qwen25_omni --num-gpus 8
 
 # VideoLLaMA2
-python infer.py --only videollama2_av
+python infer.py --only videollama2_av --num-gpus 8
 
 # Qwen3-Omni Thinking
-python infer.py --only qwen3_omni_thinking
+python infer.py --only qwen3_omni_thinking --num-gpus 8
 ```
 The inference stage generates answer.json.
 
-## Step 2: Evaluation
+## Step 3: Evaluation
 
 We use **GPT-5 as a judge** to automatically evaluate model predictions.
+
+Similar to the inference stage, we also provide multi-GPU parallel evaluation scripts for faster processing.
+
 
 For all models listed above (except Video-SALMONN-2), the generated answers should follow the format below:
 ```json
@@ -168,7 +180,7 @@ For all models listed above (except Video-SALMONN-2), the generated answers shou
 ```
 To evaluate the predictions,run:
 ```bash
-python qa_eval_gpt.py --answer_path "YOUR_PATH"
+python qa_eval_gpt.py --answer_path "YOUR_PATH" --num-gpus 8
 ```
 
 for video-SALMONN2, its answers should follow the format below:
@@ -184,7 +196,7 @@ for video-SALMONN2, its answers should follow the format below:
 ```
 To evaluate its predictions,run:
 ```bash
-python qa_eval_gpt.py --answer_path "YOUR_PATH" --style videosalmonn
+python qa_eval_gpt.py --answer_path "YOUR_PATH" --style videosalmonn --num-gpus 8
 ```
 
 ## Citation

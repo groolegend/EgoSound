@@ -70,9 +70,7 @@ We provide evaluation code to reproduce our experimental results.
 ---
 
 # Reproducing Evaluation
-## Step 2:Installation
-1. follow the egogpt [repo](https://github.com/EvolvingLMMs-Lab/EgoLife/tree/main/EgoGPT) to install egogpt env
-2. 
+
 ## Step 1: Preparation
 
 **Prepare Data:**
@@ -105,7 +103,11 @@ EgoSound
   ├── ego4d.json
 ```
 
-2. Download Model checkpoint for the target MLLM
+2. Download the model checkpoint for the target MLLM and follow the official repository to set up the required environment.
+
+   
+   We recommend creating a separate virtual environment for each model to avoid dependency conflicts.
+
 [EgoGPT-7b-EgoIT-EgoLife](https://huggingface.co/lmms-lab/EgoGPT-7b-EgoIT-EgoLife),
 [MiniCPM-o-2_6](https://huggingface.co/openbmb/MiniCPM-o-2_6),
 [Qwen3-omni](https://github.com/QwenLM/Qwen3-Omni),

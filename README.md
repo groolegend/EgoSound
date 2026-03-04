@@ -183,7 +183,7 @@ For all models listed above (except Video-SALMONN-2), the generated answers shou
 ```
 To evaluate the predictions,run:
 ```bash
-python qa_eval_gpt.py --answer_path "YOUR_PATH" --num-gpus 8
+python qa_eval_gpt.py --answer_path "YOUR_PATH" --style videollama
 ```
 
 for video-SALMONN2, its answers should follow the format below:
@@ -199,11 +199,11 @@ for video-SALMONN2, its answers should follow the format below:
 ```
 To evaluate its predictions,run:
 ```bash
-python qa_eval_gpt.py --answer_path "YOUR_PATH" --style videosalmonn --num-gpus 8
+python qa_eval_gpt.py --answer_path "YOUR_PATH" --style videosalmonn
 ```
 
 ## Citation
-If you find our benchmark or code useful for your research, please consider citing:
+If you find our work helpful, please consider citing our paper and staring our repo:
 ```bibtex
 @inproceedings{zhu2026egosound,
   title={EgoSound: Benchmarking Sound Understanding in Egocentric Videos},

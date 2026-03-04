@@ -149,7 +149,7 @@ if __name__ == "__main__":
         for i, sample in enumerate(tqdm(samples), start=1):
             if sample['question_id'] in pro_ids:
                 continue 
-            if style == "video.llama":
+            if style == "videollama":
                 result = get_score_videollama(sample)
             elif style == "videosalmonn":
                 result = get_score_videosalmonn(sample)

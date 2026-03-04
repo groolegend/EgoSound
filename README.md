@@ -22,7 +22,7 @@ EgoSound unifies data from **Ego4D** and **EgoBlind**, covering both sighted and
 - **7,315 validated QA pairs**
 - **900 egocentric videos**
 
-Comprehensive experiments on nine state-of-the-art MLLMs demonstrate that while current models exhibit emerging auditory reasoning abilities, they remain limited in fine-grained spatial and causal understanding.EgoSound establishes a challenging foundation for advancing multisensory egocentric intelligence, bridging the gap between *seeing* and truly *hearing* the world.
+EgoSound establishes a challenging foundation for advancing multisensory egocentric intelligence, bridging the gap between *seeing* and truly *hearing* the world.
 
 ---
 

@@ -18,7 +18,8 @@ from tqdm import tqdm
 
 def setup(rank, world_size):
     os.environ["MASTER_ADDR"] = "localhost"
-    os.environ["MASTER_PORT"] = "12358"
+    # Use env MASTER_PORT when running multiple parts in parallel (e.g. from infer.py) to avoid port conflict
+    os.environ.setdefault("MASTER_PORT", "12358")
     dist.init_process_group("gloo", rank=rank, world_size=world_size)
 
 
@@ -71,21 +72,37 @@ def main(
     tokenizer, model, max_length = load_pretrained_model(
         pretrained_path, device_map=device_map
     )
+    # ensure pad_token is defined so attention_mask can be inferred
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token_id = tokenizer.eos_token_id
     model.eval()
 
     qa_path = os.environ.get("QA_PATH", " ")
     qa_data = json.load(open(qa_path, "r"))
+    # derive root folder for Ego4D assets from qa file location
+    qa_dir = os.path.dirname(os.path.abspath(qa_path))
+
+    part_index = int(os.environ.get("PART_INDEX", "0"))
+    num_parts = int(os.environ.get("NUM_PARTS", "1"))
+    # only process this partition (for multi-GPU: each process handles 1/num_parts of the data)
+    qa_data = [qa for i, qa in enumerate(qa_data) if i % num_parts == part_index]
 
     answer_root = os.environ.get("ANSWER_DIR", " ")
     model_name = os.environ.get("MODEL_NAME", "egogpt_av")
     answer_dir = os.path.join(answer_root, model_name)
     os.makedirs(answer_dir, exist_ok=True)
-    answer_file = os.path.join(answer_dir, "result.json")
+    if num_parts > 1:
+        answer_file = os.path.join(answer_dir, f"result_{part_index}.json")
+    else:
+        answer_file = os.path.join(answer_dir, "result.json")
     results = []
-    
-    for i, qa in enumerate(tqdm(qa_data), start=1):
+
+    for i, qa in enumerate(tqdm(qa_data, desc=f"Part {part_index}/{num_parts}")):
         video_path = qa["video_path"]
-        audio_path = video_path.replace("video", "audio").replace(".mp4", ".wav")
+        # if paths in JSON are relative they assume an "Ego4d" folder; prepend qa_dir
+        if not os.path.isabs(video_path):
+            video_path = os.path.join(qa_dir, video_path)
+        audio_path = video_path.replace("videos", "audios").replace(".mp4", ".wav")
 
         query = qa['question']
         conv_template = "qwen_1_5"
@@ -114,12 +131,14 @@ def main(
                 input_ids.extend(tokenizer(part).input_ids)
 
         input_ids = torch.tensor(input_ids, dtype=torch.long).unsqueeze(0).to(device)
+        attention_mask = torch.ones_like(input_ids)
         image_tensor = [image[0][0].half()]
         image_sizes = [image[0][1]]
         generate_kwargs = {"eos_token_id": tokenizer.eos_token_id}
 
         cont = model.generate(
             input_ids,
+            attention_mask=attention_mask,
             images=image_tensor,
             image_sizes=image_sizes,
             speech=speech,
@@ -131,7 +150,9 @@ def main(
             **generate_kwargs,
         )
         text_outputs = tokenizer.batch_decode(cont, skip_special_tokens=True)
-        qa['pred']= text_outputs[0]
+        qa["pred"] = text_outputs[0]
+        if num_parts > 1:
+            qa["_idx"] = part_index + i * num_parts  # original index for merging
         results.append(qa)
         
     with open(answer_file, "w", encoding="utf-8") as f:

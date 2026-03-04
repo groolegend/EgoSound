@@ -62,7 +62,9 @@ We provide evaluation code to reproduce our experimental results.
 ## Step 1: Preparation
 
 **Prepare Data:**
+
 0. clone the repository
+   
 ```bash
 git clone https://github.com/groolegend/EgoSound.git
 cd EgoSound

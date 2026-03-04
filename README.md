@@ -74,7 +74,7 @@ We provide evaluation code to reproduce our experimental results.
 ## Step 1: Preparation
 
 **Prepare Data:**
-1. download the repo
+0. clone the repository
 ```bash
 git clone https://github.com/groolegend/EgoSound.git
 cd EgoSound
@@ -108,12 +108,13 @@ EgoSound
    
    We recommend creating a separate virtual environment for each model to avoid dependency conflicts.
 
-[EgoGPT-7b-EgoIT-EgoLife](https://huggingface.co/lmms-lab/EgoGPT-7b-EgoIT-EgoLife),
-[MiniCPM-o-2_6](https://huggingface.co/openbmb/MiniCPM-o-2_6),
-[Qwen3-omni](https://github.com/QwenLM/Qwen3-Omni),
-[Qwen2.5-omni](https://github.com/QwenLM/Qwen2.5-Omni),
-[VideoLLaMA2.1-7B-AV](https://huggingface.co/DAMO-NLP-SG/VideoLLaMA2.1-7B-AV),
-[Video-SALMONN-2](https://github.com/bytedance/video-SALMONN-2),
+
+    [EgoGPT-7b-EgoIT-EgoLife](https://huggingface.co/lmms-lab/EgoGPT-7b-EgoIT-EgoLife),
+    [MiniCPM-o-2_6](https://huggingface.co/openbmb/MiniCPM-o-2_6),
+    [Qwen3-omni](https://github.com/QwenLM/Qwen3-Omni),
+    [Qwen2.5-omni](https://github.com/QwenLM/Qwen2.5-Omni),
+    [VideoLLaMA2.1-7B-AV](https://huggingface.co/DAMO-NLP-SG/VideoLLaMA2.1-7B-AV),
+    [Video-SALMONN-2](https://github.com/bytedance/video-SALMONN-2),
 ---
 
 ## Step 2: Inference

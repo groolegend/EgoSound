@@ -17,24 +17,12 @@ Official release of the paper:
 
 We introduce **EgoSound**, the first benchmark designed to systematically evaluate **egocentric sound understanding** in Multimodal Large Language Models (MLLMs).
 
-EgoSound unifies data from **Ego4D** and **EgoBlind**, covering both sighted and sound-dependent experiences. The benchmark defines a **seven-task taxonomy**, spanning:
-
-- Sound Characteristics  
-- Counting
-- Temporal Attribute
-- Spatial Location
-- Sound Source Identification
-- Inferential Causality
-- Cross-Modal Reasoning  
-
-Constructed through a multi-stage auto-generative pipeline, EgoSound contains:
+EgoSound unifies data from **Ego4D** and **EgoBlind**, covering both sighted and sound-dependent experiences. Constructed through a multi-stage auto-generative pipeline, EgoSound contains:
 
 - **7,315 validated QA pairs**
 - **900 egocentric videos**
 
-Comprehensive experiments on nine state-of-the-art MLLMs demonstrate that while current models exhibit emerging auditory reasoning abilities, they remain limited in fine-grained spatial and causal understanding.
-
-EgoSound establishes a challenging foundation for advancing multisensory egocentric intelligence, bridging the gap between *seeing* and truly *hearing* the world.
+Comprehensive experiments on nine state-of-the-art MLLMs demonstrate that while current models exhibit emerging auditory reasoning abilities, they remain limited in fine-grained spatial and causal understanding.EgoSound establishes a challenging foundation for advancing multisensory egocentric intelligence, bridging the gap between *seeing* and truly *hearing* the world.
 
 ---
 

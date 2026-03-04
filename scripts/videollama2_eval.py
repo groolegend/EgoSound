@@ -27,16 +27,26 @@ def inference():
 
     qa_path = os.environ.get("QA_PATH", "")
     qa_data = json.load(open(qa_path, "r"))
+    qa_dir = os.path.dirname(os.path.abspath(qa_path))
+
+    part_index = int(os.environ.get("PART_INDEX", "0"))
+    num_parts = int(os.environ.get("NUM_PARTS", "1"))
+    qa_data = [qa for i, qa in enumerate(qa_data) if i % num_parts == part_index]
 
     answer_root = os.environ.get("ANSWER_DIR", "")
     model_name = os.environ.get("MODEL_NAME", "videollama2_av")
     answer_dir = os.path.join(answer_root, model_name)
     os.makedirs(answer_dir, exist_ok=True)
-    answer_file = os.path.join(answer_dir, "result.json")
+    if num_parts > 1:
+        answer_file = os.path.join(answer_dir, f"result_{part_index}.json")
+    else:
+        answer_file = os.path.join(answer_dir, "result.json")
     results = []
 
-    for i, qa in enumerate(tqdm(qa_data), start=1):
+    for i, qa in enumerate(tqdm(qa_data, desc=f"Part {part_index}/{num_parts}")):
         audio_video_path = qa["video_path"]
+        if not os.path.isabs(audio_video_path):
+            audio_video_path = os.path.join(qa_dir, audio_video_path)
         audio_video_path = audio_video_path.replace("videos", "audios").replace(
             ".mp4", ".wav"
         )
@@ -58,6 +68,8 @@ def inference():
             do_sample=False,
         )
         qa["pred"] = output
+        if num_parts > 1:
+            qa["_idx"] = part_index + i * num_parts
         results.append(qa)
 
     with open(answer_file, "w", encoding="utf-8") as f:

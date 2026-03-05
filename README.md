@@ -1,15 +1,8 @@
-# [CVPR2026]EgoSound 
+## [CVPR2026] EgoSound: Benchmarking Sound Understanding in Egocentric Videos
 
-## EgoSound: Benchmarking Sound Understanding in Egocentric Videos
+[News: Feb 26] Our Paper is accepted by CVPR2026! 🎉
 
-Official release of the paper:
-
-**EgoSound: Benchmarking Sound Understanding in Egocentric Videos**  
-📄 **[paper](https://arxiv.org/abs/2602.14122)**
-
-👐 **[huggingface](https://huggingface.co/datasets/grooLegend/EgoSound)**
-
-🌍 **[website page](https://groolegend.github.io/EgoSound/)**
+[News: Feb 26] We release our: 📄 **[paper](https://arxiv.org/abs/2602.14122)**, 👐 **[huggingface](https://huggingface.co/datasets/grooLegend/EgoSound)**, 🌍 **[website page](https://groolegend.github.io/EgoSound/)** Please check them out! 🔥🔥🔥
 
 ---
 

@@ -151,7 +151,7 @@
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1>EgoSound<span class="hero-title-tag">[CVPR2026]</span></h1>
+      <h1>EgoSound<span class="hero-title-tag">[CVPR2026 Highlight]</span></h1>
       <p style="margin: 8px 0 4px; font-size: 18px; color: #facc15;">
         Bingwen Zhu<sup>1,2*</sup> Yuqian Fu<sup>3*†</sup> Qiaole Dong<sup>1</sup> Guolei Sun<sup>4</sup> Tianwen Qian<sup>5</sup><br/>
         Yuzheng Wu<sup>1</sup> Danda Pani Paudel<sup>3</sup> Xiangyang Xue<sup>1</sup> Yanwei Fu<sup>1,2</sup>
